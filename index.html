@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCET Rank Predictor by Venkatesh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #6e8efb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #a777e3;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>KCET Rank Predictor By Venkatesh Biradar</h1>
+        <form id="rankPredictorForm" onsubmit="calculateRank(event)">
+            <input type="number" id="pucMarks" placeholder="Enter your PUC marks out of 300" required>
+            <input type="number" id="kcetMarks" placeholder="Enter your KCET marks out of 141" required>
+            <button type="submit">Predict Rank</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        function calculateRank(event) {
+            event.preventDefault();
+            const pucMarks = parseFloat(document.getElementById('pucMarks').value);
+            const kcetMarks = parseFloat(document.getElementById('kcetMarks').value);
+
+            const pucPercentage = (pucMarks / 300) * 50;
+            const kcetPercentage = (kcetMarks / 141) * 50;
+            const totalScore = pucPercentage + kcetPercentage;
+
+            let estimatedRank;
+            if (totalScore >= 90) {
+                estimatedRank = '1 - 100';
+            } else if (totalScore >= 80) {
+                estimatedRank = '101 - 500';
+            } else if (totalScore >= 70) {
+                estimatedRank = '501 - 1000';
+            } else if (totalScore >= 60) {
+                estimatedRank = '1001 - 5000';
+            } else if (totalScore >= 50) {
+                estimatedRank = '5001 - 10000';
+            } else if (totalScore >= 40) {
+                estimatedRank = '10001 - 20000';
+            } else {
+                estimatedRank = 'Above 20000';
+            }
+
+            document.getElementById('result').innerText = `Your estimated KCET rank is: ${estimatedRank}`;
+        }
+    </script>
+</body>
+</html>
